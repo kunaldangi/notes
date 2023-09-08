@@ -10,39 +10,41 @@ export default function Register() {
     const [otp, setOtp] = useState("NULL");
     
     async function onclick_createAccount() {
-        if( offBtn === false){
-            offBtn = true;
-            console.log("BTN Clicked!");
-            let usr_input = document.getElementById("login-usr");
-            let email_input = document.getElementById("login-email");
-            let pwd_input = document.getElementById("login-pwd");
-    
-            const response = await fetch("http://localhost:5888/api/auth/register", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: usr_input.value,
-                    email: email_input.value,
-                    password: pwd_input.value
-                })
-            });
-            usr_input.value = "";
-    
-            let data = await response.json();
-            if(data.error){
-                setError(data.error);
+        try {
+            if( offBtn === false){
+                offBtn = true;
+                let usr_input = document.getElementById("login-usr");
+                let email_input = document.getElementById("login-email");
+                let pwd_input = document.getElementById("login-pwd");
+        
+                const response = await fetch("http://localhost:5888/api/auth/register", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: usr_input.value,
+                        email: email_input.value,
+                        password: pwd_input.value
+                    })
+                });
+                usr_input.value = "";
+        
+                let data = await response.json();
+                if(data.error){
+                    setError(data.error);
+                }
+                if(data.status === "otp sent!"){
+                    sessionStorage.setItem('otp_token', data.otp_token);
+                    setOtp("SENT");
+                    setError("OTP sent!, Check your email!");
+                }
+                offBtn = false;
             }
-            if(data.status === "otp sent!"){
-                sessionStorage.setItem('otp_token', data.otp_token);
-                setOtp("SENT");
-                setError("OTP sent!, Check your email!");
-            }
-            offBtn = false;
-        }
-        else{
-            console.log("BTN Disabled!");
+            
+        } catch (error) {
+            setError(`${error}`);
+            console.log(error);
         }
     }
     

@@ -2,8 +2,9 @@ const express = require('express');
 const User = require("../models/User");
 const Otp = require("../models/Otp");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const {send_mail} = require("../config/email");
-const config = require("../config/config.json")
+const config = require("../config/config.json");
 const router = express.Router();
 
 // root
@@ -56,7 +57,7 @@ router.post('/', async (req, res)=>{
             res.send(JSON.stringify({
                 status: "otp failed!",
                 error: "Check your email."
-            }))
+            }));
         }
     }
     catch (err){
@@ -137,11 +138,14 @@ router.post('/verify', async (req, res)=>{
         }
 
         if(result.code == req.body.otp_code){
+
+            let saltPass = bcrypt.genSaltSync(10);
+            let hashPass = bcrypt.hashSync(result.password, saltPass);
             
             const newUser = new User({
                 username: result.username,
                 email: result.email,
-                password: result.password
+                password: hashPass
             });
             await newUser.save();
 

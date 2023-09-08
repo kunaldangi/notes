@@ -1,0 +1,40 @@
+nav{
+    background-color: #f5fff4d6;
+    padding-top: 7px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #aac8a73a;
+}
+
+.icon-notes{
+    display: flex;
+    align-items: center;
+}
+
+.icon-notes img{
+    width: 50px;
+    height: 50px;
+    padding-left: 15px;
+    filter: drop-shadow(0px 2px 3px #aac8a7c3);
+}
+
+.icon-notes-text{
+    color: rgb(170, 200, 167);
+    padding: 10px;
+    font-size: 23px;
+}
+
+.note-add{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 8px;
+    border: 1px solid #aac8a797;
+    border-radius: 5px;
+    box-shadow: 0px 1px 6px 0px #aac8a797;
+}
+
+.notes{
+    margin-top: 1%;
+    margin-left: 1%;
+}
