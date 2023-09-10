@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login-Register.css";
 
 let offBtn = false;
 export default function Login() {
-
+    const navigate = useNavigate();
     const [error, setError] = useState("NULL");
 
     async function onclick_login() {
@@ -34,6 +34,9 @@ export default function Login() {
                 else if(data.status === "Success!"){
                     localStorage.setItem('login_token', data.login_token);
                     setError("Logged In!");
+                    setTimeout(() => {
+                        navigate('/home');
+                    }, 1000);
                 }
                 else if(data.error){
                     setError(data.error);
