@@ -1,6 +1,11 @@
 .note-main{
+    display: inline-block;
+    margin: 5px;
+
     width: 350px;
-    /* height: 400px; */
+    max-height: 400px;
+    overflow: hidden;
+
     padding: 8px;
     border: 1px solid #E0DECA;
 }
@@ -14,6 +19,37 @@
 }
 
 .note-content{
+    margin-top: 10px;
+    margin-bottom: 15px;
     outline: none;
     max-height: 400px;
+}
+
+.note-content.overflow{
+    overflow-y: scroll;
+}
+
+.note-main.animate {
+    width: 500px;
+    max-height: 600px;
+    
+    position: absolute;
+    top: 18%;
+    left: 35%;
+    
+    background-color: white;
+    z-index: 10;
+}
+
+.note-btn{
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    padding: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.note-isSaved{
+    text-align: center;
+    color: #C7D36F;
 }
