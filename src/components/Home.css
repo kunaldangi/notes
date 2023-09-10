@@ -38,3 +38,26 @@ nav{
     margin-top: 1%;
     margin-left: 1%;
 }
+
+.note-add.createNote{
+    width: 500px;
+    max-height: 600px;
+    
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    
+    background-color: white;
+    z-index: 10;
+    outline: none;
+}
+
+.create-note-title-placeholder:empty:before {
+    content: "Title";
+    color: #c2c2c2;
+}
+
+.create-note-content-placeholder:empty:before {
+    content: "Content";
+    color: #c2c2c2;
+}  
