@@ -12,6 +12,9 @@ function Index() {
         if(login_token){
             navigate('/home');
         }
+        else{
+            navigate('/login');
+        }
     }, []);
 
     return (<h1>Welcome to index.</h1>);

@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import Note from "./Note";
 import config from "../config.json";
 import "./Home.css";
 
 
 function Home() {
+    const navigate = useNavigate();
     const [notes, setNotes] = useState([]);
     const [userInfo, setUserInfo] = useState({});
     const [takeNote, setTakeNote] = useState(false);
@@ -55,8 +57,14 @@ function Home() {
     };
 
     useEffect(() => {
-        fetchNotes();
-        fetchUserInfo();
+        let login_token = localStorage.getItem('login_token');
+        if(login_token){
+            fetchNotes();
+            fetchUserInfo();
+        }
+        else{
+            navigate('/login');
+        }
     }, []);
 
     useEffect(()=>{
