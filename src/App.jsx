@@ -15,7 +15,7 @@ function Index() {
         else{
             navigate('/login');
         }
-    }, []);
+    }, [navigate]);
 
     return (<h1>Welcome to index.</h1>);
 }

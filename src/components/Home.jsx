@@ -65,7 +65,7 @@ function Home() {
         else{
             navigate('/login');
         }
-    }, []);
+    }, [navigate]);
 
     useEffect(()=>{
         document.addEventListener("click", function(event) {
