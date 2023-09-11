@@ -171,7 +171,7 @@ function Home() {
                         <div className="profile-username-text" style={{fontSize: "21px"}}>
                             {userInfo.username}
                         </div>
-                        <img id="user-profile-img" src="./profile-logo.png" alt="not found!" />
+                        <img id="user-profile-img" src="./profile-logo.png" alt="not found!" style={{height: "50px", width: "50px"}}/>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ export default function Register() {
         try {
             if( offBtn === false){
                 offBtn = true;
+                setError("Please wait!");
                 let usr_input = document.getElementById("login-usr");
                 let email_input = document.getElementById("login-email");
                 let pwd_input = document.getElementById("login-pwd");

@@ -37,7 +37,7 @@ export default function Login() {
                     setError("Logged In!");
                     setTimeout(() => {
                         navigate('/home');
-                    }, 1000);
+                    }, 750);
                 }
                 else if(data.error){
                     setError(data.error);
