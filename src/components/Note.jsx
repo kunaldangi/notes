@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef} from "react";
-import "./Note.css";
+import config from "../config.json"
+;import "./Note.css";
 
 function Note(props) {
     const [editable, setEditable] = useState(false);
@@ -19,7 +20,7 @@ function Note(props) {
         let note_content = noteRef.current.querySelector("#note-content-id");
 
         try {
-            const response = await fetch("http://localhost:5888/api/notes/edit", {
+            const response = await fetch(`${config.backend_url}/api/notes/edit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ function Note(props) {
 
     async function onclick_noteDelete() {
         try {
-            const response = await fetch("http://localhost:5888/api/notes/delete", {
+            const response = await fetch(`${config.backend_url}/api/notes/delete`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ function Note(props) {
 
 async function fetchNotes() {
     try {
-        const response = await fetch("http://localhost:5888/api/notes/get", {
+        const response = await fetch(`${config.backend_url}/api/notes/get`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

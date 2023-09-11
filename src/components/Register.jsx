@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import config from "../config.json";
 import "./Login-Register.css";
 
 let offBtn = false;
@@ -17,7 +18,7 @@ export default function Register() {
                 let email_input = document.getElementById("login-email");
                 let pwd_input = document.getElementById("login-pwd");
         
-                const response = await fetch("http://localhost:5888/api/auth/register", {
+                const response = await fetch(`${config.backend_url}/api/auth/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export default function Register() {
             let usr_input = document.getElementById("login-usr");
             let token = null;
             token = sessionStorage.getItem('otp_token');
-            const response = await fetch("http://localhost:5888/api/auth/register/verify", {
+            const response = await fetch(`${config.backend_url}/api/auth/register/verify`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login"
 import Register from "./components/Register"
 
 function Index() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        let login_token = localStorage.getItem('login_token');
+        if(login_token){
+            navigate('/home');
+        }
+    }, []);
+
     return (<h1>Welcome to index.</h1>);
 }
 
@@ -13,7 +21,7 @@ function Index() {
 
 function NoPage() {
     function show(){
-        let element = <div>404</div>;
+        let element = <div>404 Page Not Found!</div>;
         return element;
     }
 

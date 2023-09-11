@@ -1,20 +1,21 @@
 import React, { useState, useEffect} from "react";
 import Note from "./Note";
+import config from "../config.json";
 import "./Home.css";
 
 
 function Home() {
     const [notes, setNotes] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
     const [takeNote, setTakeNote] = useState(false);
     const [takeNoteError, setTakeNoteError] = useState("NULL");
 
     async function fetchNotes() {
-        console.log("Getting notes....")
         try {
-            const response = await fetch("http://localhost:5888/api/notes/get", {
+            const response = await fetch(`${config.backend_url}/api/notes/get`, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     login_token: localStorage.getItem('login_token')
@@ -23,10 +24,29 @@ function Home() {
     
             const data = await response.json();
             setNotes(data);
-            console.log(data);
         }
         catch (error) {
             console.error(error);
+        }
+    }
+
+    async function fetchUserInfo() {
+        try {
+            const response = await fetch(`${config.backend_url}/api/user/info`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    login_token: localStorage.getItem('login_token')
+                })
+            });
+
+            const data = await response.json();
+            setUserInfo(data);
+        } 
+        catch (error) {
+            console.log(error);    
         }
     }
     
@@ -36,6 +56,7 @@ function Home() {
 
     useEffect(() => {
         fetchNotes();
+        fetchUserInfo();
     }, []);
 
     useEffect(()=>{
@@ -72,7 +93,7 @@ function Home() {
         }
 
         try {
-            const response = await fetch("http://localhost:5888/api/notes/post", {
+            const response = await fetch(`${config.backend_url}/api/notes/post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -128,10 +149,22 @@ function Home() {
 
     return (<>
         <nav>
-            <div className="icon-notes">
-                <img src="./notes-logo.png" alt="not found!" />
-                <div className="icon-notes-text">
-                    Notes
+            <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+                <div style={{display: "inline-block"}}>
+                    <div className="icon-notes">
+                        <img src="./notes-logo.png" alt="not found!" />
+                        <div className="icon-notes-text">
+                            Notes
+                        </div>
+                    </div>
+                </div>
+                <div style={{display: "inline-block", marginRight: "15px"}}>
+                    <div style={{display: "flex", alignItems: "center"}}>
+                        <div className="profile-username-text" style={{fontSize: "21px"}}>
+                            {userInfo.username}
+                        </div>
+                        <img id="user-profile-img" src="./profile-logo.png" alt="not found!" />
+                    </div>
                 </div>
             </div>
         </nav>

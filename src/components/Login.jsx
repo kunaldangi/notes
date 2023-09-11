@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import config from "../config.json";
 import "./Login-Register.css";
 
 let offBtn = false;
@@ -14,7 +15,7 @@ export default function Login() {
                 let usr_input = document.getElementById('login-usr');
                 let pwd_input = document.getElementById('login-pwd');
         
-                const response = await fetch("http://localhost:5888/api/auth/login", {
+                const response = await fetch(`${config.backend_url}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ export default function Login() {
             <div className="login-input">
                 <input id="login-usr" type="text" placeholder="Username or Email" style={{marginBottom: "5px"}}/> <br />
                 <input id="login-pwd" type="password" placeholder="Password" /> <br />
-                <button className="login-btn" style={{marginTop: "20px"}} onClick={async ()=>{ await onclick_login()}}>Login</button>
+                <button className="login-btn" style={{marginTop: "20px"}} onClick={async ()=>{await onclick_login()}}>Login</button>
             </div>
             {show_error()}
 
