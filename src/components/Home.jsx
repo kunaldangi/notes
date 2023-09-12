@@ -168,10 +168,10 @@ function Home() {
                 </div>
                 <div style={{display: "inline-block", marginRight: "15px"}}>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <div className="profile-username-text" style={{fontSize: "21px"}}>
+                        <div className="profile-username-text">
                             {userInfo.username}
                         </div>
-                        <img id="user-profile-img" src="./profile-logo.png" alt="not found!" style={{height: "50px", width: "50px"}}/>
+                        <img id="user-profile-img" src="./profile-logo.png" alt="not found!"/>
                     </div>
                 </div>
             </div>

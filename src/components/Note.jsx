@@ -119,7 +119,7 @@ function Note(props) {
     }
 
     return (<>
-        <div ref={noteRef} style={{display: "inline-block"}}>
+        <div className="top-note" ref={noteRef}>
             <div className="note-main" id="note-main-id" onClick={async ()=>{await onclick_note()}}>
                 <div className="note-title" id="note-title-id" contentEditable={editable}>{props.title}</div>
                 <div className="note-content" id="note-content-id" contentEditable={editable}>{props.content}</div>
