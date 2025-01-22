@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require('cors');
+const path = require('path');
+
 const connectDatabase = require("./config/db");
 
 const app = express();
@@ -7,8 +9,7 @@ const port = 5888;
 connectDatabase("mongodb://127.0.0.1:27017/notes");
 
 const corsOptions = {
-    // origin: ['http://localhost:3000', 'http://172.16.0.2:3000']
-    orgin: '*',
+    origin: ['http://localhost:3000', 'http://kunaldangi.ddns.net:8003'],
 };
 app.use(cors(corsOptions));
 
@@ -18,9 +19,7 @@ app.use('/api/auth/register', require('./routes/register'));
 app.use('/api/notes', require('./routes/notes'));
 app.use('/api/user', require('./routes/user'));
 
-app.get('/', (req, res)=>{
-    res.send('page file');
-})
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.listen(port, ()=>{
     console.log(`Backend Server listing on: ${port}`);
